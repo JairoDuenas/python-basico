@@ -36,9 +36,10 @@ class Moto(Vehiculos):
     def estado(self):
         print(f'Marca: {self.marca} \nModelo: {self.modelo} \nEn marcha: {self.en_marcha} \nAcelerando: {self.acelera} \nFrenado: {self.frena} \n{self.hace_caballito}')
 
-class V_electrico():
-    def __init__(self):
-        self.autonimia = 100
+class V_electrico(Vehiculos):
+    def __init__(self, marca, modelo):
+      super().__init__(marca, modelo)
+      self.autonimia = 100
     def cargar_energia(self):
         self.cargando = True
 
@@ -55,4 +56,28 @@ print(mi_furgoneta.carga(True))
 class Bici_electrica(V_electrico, Vehiculos):
     pass
 
-mi_bici = Bici_electrica()
+mi_bici = Bici_electrica('orbe', 'scot')
+
+""" class Persona():
+  def __init__(self, nombre, edad, lugar_residencia):
+    self.nombre = nombre
+    self.edad = edad
+    self.lugar_residencia = lugar_residencia
+
+  def description(self):
+    print(f'Nombre: {self.nombre} \nEdad: {self.edad} \nResidencia: {self.lugar_residencia}')
+
+class Empleado(Persona):
+  def __init__(self, salario, antigüedad, nombre_empleado, edad_empleado, residencia_empleado):
+    super().__init__(nombre_empleado, edad_empleado, residencia_empleado)
+    self.salario = salario
+    self.antigüedad = antigüedad
+
+  def description(self):
+    super().description()
+
+    print(f'Salario: {self.salario} \nAntigüedad: {self.antigüedad} ')
+
+Manuel = Empleado(1500, 15, 'Manuel', 55, 'Colombia')
+Manuel.description()
+print(isinstance(Manuel, Empleado)) """
