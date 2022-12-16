@@ -21,15 +21,7 @@ class Vehiculos():
 
 
 class Moto(Vehiculos):
-    hace_caballito = ''
-
-    def caballito(self):
-        self.hace_caballito = 'Voy haciendo caballito'
-
-    def estado(self):
-        print(f'Marca: {self.marca} \nModelo: {self.modelo} \nEn marcha: {self.en_marcha} \nAcelerando: {self.acelera} \nFrenado: {self.frena} \nHace caballito: {self.hace_caballito}')
-
+    pass
 
 mi_moto = Moto('Honda', 'CBR')
-mi_moto.caballito()
 mi_moto.estado()
