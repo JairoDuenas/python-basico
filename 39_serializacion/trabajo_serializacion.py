@@ -9,8 +9,6 @@ fichero_binario.close()
 del (fichero_binario) """
 
 # Rescatando el fichero bianrio
-
 fichero = open('lista_nombres', 'rb')
 lista = pickle.load(fichero)
 print(lista)
-
