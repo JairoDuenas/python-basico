@@ -3,7 +3,7 @@ import os
 
 root = Tk()
 
-root.iconbitmap('logo.png')
+root.iconbitmap('/Users/jhonjairoduenasvega/logo/logo.xbm')
 root.title('Ventana de prueba 2')
 root.config(
     bg='yellow',
