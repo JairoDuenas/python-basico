@@ -94,12 +94,39 @@ def multiplica(numero):
     operacion='multiplicacion'
     reset_pantalla=True
 
+# función dividir ----------------------------------
+
+contador_dividir=0
+
+def divide(numero):
+    global operacion
+    global resultado
+    global num1
+    global contador_dividir
+    global reset_pantalla
+
+    if contador_dividir==0:
+        num1=float(numero)
+        resultado=num1
+    else:
+        if contador_dividir==1:
+            resultado=num1/float(numero)
+        else:
+            resultado=float(resultado)/float(numero)
+        numero_pantalla.set(resultado)
+        resultado=numero_pantalla.get()
+
+    contador_dividir=contador_dividir+1
+    operacion='division'
+    reset_pantalla=True
+
 # función el_resultado ---------------------------------
 def el_resultado():
     global resultado
     global operacion
     global contador_resta
     global contador_multiplica
+    global contador_dividir
 
     if operacion == 'suma':
         numero_pantalla.set(resultado+int(numero_pantalla.get()))
@@ -112,6 +139,11 @@ def el_resultado():
         numero_pantalla.set(int(resultado)*int(numero_pantalla.get()))
         resultado=0
         contador_multiplica=0
+    elif operacion == 'division':
+        numero_pantalla.set(int(resultado)/int(numero_pantalla.get()))
+        resultado=0
+        contador_dividir=0
+
 # fila 1 ----------------------------------------
 boton_7=Button(mi_frame, text='7', width=3, command=lambda:numero_pulsado('7'))
 boton_7.grid(row=2, column=1)
@@ -122,7 +154,7 @@ boton_8.grid(row=2, column=2)
 boton_9=Button(mi_frame, text='9', width=3, command=lambda:numero_pulsado('9'))
 boton_9.grid(row=2, column=3)
 
-boton_dividir=Button(mi_frame, text='/', width=3)
+boton_dividir=Button(mi_frame, text='/', width=3, command=lambda:divide(numero_pantalla.get()))
 boton_dividir.grid(row=2, column=4)
 
 # fila 2 ----------------------------------------
