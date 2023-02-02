@@ -5,7 +5,10 @@ root=Tk()
 mi_frame=Frame(root)
 mi_frame.pack()
 
-# pantalla
+operacion=''
+resultado=0
+
+# pantalla -------------------------------------
 
 numero_pantalla=StringVar()
 
@@ -15,7 +18,28 @@ pantalla.config(background='black', fg='#03f943', justify='right')
 
 # pulsaciones teclado --------------------------
 def numero_pulsado(numero):
-    numero_pantalla.set(numero_pantalla.get() + numero)
+    global operacion
+
+    if operacion != '':
+        numero_pantalla.set(numero)
+        operacion=''
+    else:
+        numero_pantalla.set(numero_pantalla.get() + numero)
+
+# función suma ---------------------------------
+
+def suma(numero):
+    global operacion
+    global resultado
+    resultado += int(numero)
+    operacion='suma'
+    numero_pantalla.set(resultado)
+
+# función el_resultado ---------------------------------
+def el_resultado():
+    global resultado
+    numero_pantalla.set(resultado+int(numero_pantalla.get()))
+    resultado=0
 
 # fila 1 ----------------------------------------
 boton_7=Button(mi_frame, text='7', width=3, command=lambda:numero_pulsado('7'))
@@ -63,10 +87,10 @@ boton_0.grid(row=5, column=1)
 boton_coma=Button(mi_frame, text=',', width=3, command=lambda:numero_pulsado(','))
 boton_coma.grid(row=5, column=2)
 
-boton_igual=Button(mi_frame, text='=', width=3)
+boton_igual=Button(mi_frame, text='=', width=3, command=lambda:el_resultado())
 boton_igual.grid(row=5, column=3)
 
-boton_suma=Button(mi_frame, text='+', width=3)
+boton_suma=Button(mi_frame, text='+', width=3, command=lambda:suma(numero_pantalla.get()))
 boton_suma.grid(row=5, column=4)
 
 root.mainloop()
