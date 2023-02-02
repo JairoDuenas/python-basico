@@ -8,6 +8,8 @@ mi_frame.pack()
 operacion=''
 resultado=0
 
+reset_pantalla=False
+
 # pantalla -------------------------------------
 
 numero_pantalla=StringVar()
@@ -19,10 +21,11 @@ pantalla.config(background='black', fg='#03f943', justify='right')
 # pulsaciones teclado --------------------------
 def numero_pulsado(numero):
     global operacion
+    global reset_pantalla
 
-    if operacion != '':
+    if reset_pantalla != False:
         numero_pantalla.set(numero)
-        operacion=''
+        reset_pantalla=False
     else:
         numero_pantalla.set(numero_pantalla.get() + numero)
 
@@ -31,8 +34,11 @@ def numero_pulsado(numero):
 def suma(numero):
     global operacion
     global resultado
+    global reset_pantalla
+
     resultado += int(numero)
     operacion='suma'
+    reset_pantalla=True
     numero_pantalla.set(resultado)
 
 # función el_resultado ---------------------------------
