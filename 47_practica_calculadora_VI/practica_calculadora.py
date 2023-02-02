@@ -41,11 +41,46 @@ def suma(numero):
     reset_pantalla=True
     numero_pantalla.set(resultado)
 
+# función resta ----------------------------------------
+
+num1=0
+contador_resta=0
+
+def resta(numero):
+    global operacion
+    global resultado
+    global num1
+    global contador_resta
+    global reset_pantalla
+
+    if contador_resta==0:
+        num1=int(numero)
+        resultado=num1
+    else:
+        if contador_resta==1:
+            resultado=num1-int(numero)
+        else:
+            resultado=int(resultado)-int(numero)
+        numero_pantalla.set(resultado)
+        resultado=numero_pantalla.get()
+
+    contador_resta=contador_resta + 1
+    operacion='resta'
+    reset_pantalla= True
+
 # función el_resultado ---------------------------------
 def el_resultado():
     global resultado
-    numero_pantalla.set(resultado+int(numero_pantalla.get()))
-    resultado=0
+    global operacion
+    global contador_resta
+
+    if operacion == 'suma':
+        numero_pantalla.set(resultado+int(numero_pantalla.get()))
+        resultado=0
+    elif operacion == 'resta':
+        numero_pantalla.set(int(resultado)-int(numero_pantalla.get()))
+        resultado=0
+        contador_resta=0
 
 # fila 1 ----------------------------------------
 boton_7=Button(mi_frame, text='7', width=3, command=lambda:numero_pulsado('7'))
@@ -83,7 +118,7 @@ boton_2.grid(row=4, column=2)
 boton_3=Button(mi_frame, text='3', width=3, command=lambda:numero_pulsado('3'))
 boton_3.grid(row=4, column=3)
 
-boton_restar=Button(mi_frame, text='-', width=3)
+boton_restar=Button(mi_frame, text='-', width=3, command=lambda:resta(numero_pantalla.get()))
 boton_restar.grid(row=4, column=4)
 
 # fila 4 ----------------------------------------
