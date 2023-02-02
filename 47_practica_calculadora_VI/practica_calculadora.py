@@ -68,11 +68,38 @@ def resta(numero):
     operacion='resta'
     reset_pantalla= True
 
+# función multiplicar ----------------------------------
+
+contador_multiplica=0
+
+def multiplica(numero):
+    global operacion
+    global resultado
+    global num1
+    global contador_multiplica
+    global reset_pantalla
+
+    if contador_multiplica==0:
+        num1=int(numero)
+        resultado=num1
+    else:
+        if contador_multiplica==1:
+            resultado=num1 * int(numero)
+        else:
+            resultado=int(resultado)*int(numero)
+        numero_pantalla.set(resultado)
+        resultado=numero_pantalla.get()
+
+    contador_multiplica=contador_multiplica+1
+    operacion='multiplicacion'
+    reset_pantalla=True
+
 # función el_resultado ---------------------------------
 def el_resultado():
     global resultado
     global operacion
     global contador_resta
+    global contador_multiplica
 
     if operacion == 'suma':
         numero_pantalla.set(resultado+int(numero_pantalla.get()))
@@ -81,7 +108,10 @@ def el_resultado():
         numero_pantalla.set(int(resultado)-int(numero_pantalla.get()))
         resultado=0
         contador_resta=0
-
+    elif operacion == 'multiplicacion':
+        numero_pantalla.set(int(resultado)*int(numero_pantalla.get()))
+        resultado=0
+        contador_multiplica=0
 # fila 1 ----------------------------------------
 boton_7=Button(mi_frame, text='7', width=3, command=lambda:numero_pulsado('7'))
 boton_7.grid(row=2, column=1)
@@ -105,7 +135,7 @@ boton_5.grid(row=3, column=2)
 boton_6=Button(mi_frame, text='6', width=3, command=lambda:numero_pulsado('6'))
 boton_6.grid(row=3, column=3)
 
-boton_multiplicar=Button(mi_frame, text='x', width=3)
+boton_multiplicar=Button(mi_frame, text='x', width=3, command=lambda:multiplica(numero_pantalla.get()))
 boton_multiplicar.grid(row=3, column=4)
 
 # fila 3 ----------------------------------------
