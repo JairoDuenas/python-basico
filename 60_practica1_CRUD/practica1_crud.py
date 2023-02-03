@@ -66,21 +66,27 @@ barra_menu.add_cascade(label="Ayuda", menu=ayuda_menu)
 mi_frame=Frame(root)
 mi_frame.pack()
 
-cuadro_id=Entry(mi_frame)
+mi_id=StringVar()
+mi_nombre=StringVar()
+mi_apellido=StringVar()
+mi_password=StringVar()
+mi_direccion=StringVar()
+
+cuadro_id=Entry(mi_frame, textvariable=mi_id)
 cuadro_id.grid(row=0, column=1, padx=10, pady=10)
 
-cuadro_nombre=Entry(mi_frame)
+cuadro_nombre=Entry(mi_frame, textvariable=mi_nombre)
 cuadro_nombre.grid(row=1, column=1, padx=10, pady=10)
 cuadro_nombre.config(fg="red", justify="right")
 
-cuadro_password=Entry(mi_frame)
+cuadro_password=Entry(mi_frame, textvariable=mi_password)
 cuadro_password.grid(row=2, column=1, padx=10, pady=10)
 cuadro_password.config(show="*")
 
-cuadro_apellido=Entry(mi_frame)
+cuadro_apellido=Entry(mi_frame, textvariable=mi_apellido)
 cuadro_apellido.grid(row=3, column=1, padx=10, pady=10)
 
-cuadro_direccion=Entry(mi_frame)
+cuadro_direccion=Entry(mi_frame, textvariable=mi_direccion)
 cuadro_direccion.grid(row=4, column=1, padx=10, pady=10)
 
 texto_comentatio=Text(mi_frame, width=26, height=5)
