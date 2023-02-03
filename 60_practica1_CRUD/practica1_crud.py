@@ -30,6 +30,26 @@ def salir_aplicacion():
   if valor=="yes":
     root.destroy()
 
+def limpiar_campos():
+  mi_id.set("")
+  mi_nombre.set("")
+  mi_password.set("")
+  mi_apellido.set("")
+  mi_direccion.set("")
+  texto_comentatio.delete(1.0, END)
+
+def crear():
+  mi_conexion=sqlite3.connect("Usuarios")
+  mi_cursor=mi_conexion.cursor()
+
+  mi_cursor.execute("INSERT INTO DATOSUSUARIOS VALUES(NULL, '" + mi_nombre.get() +
+                    "','" + mi_password.get() +
+                    "','" + mi_apellido.get() +
+                    "','" + mi_direccion.get() +
+                    "','" + texto_comentatio.get("1.0", END) + "')")
+
+  mi_conexion.commit()
+  messagebox.showinfo("Base de datos", "Registo insertado con éxito")
 # --------------------------------------------------
 
 root=Tk()
@@ -44,10 +64,10 @@ bbdd_menu.add_command(label="Conectar", command=conexion_BBDD)
 bbdd_menu.add_command(label="Salir", command=salir_aplicacion)
 
 borrar_menu=Menu(barra_menu, tearoff=0)
-borrar_menu.add_command(label="Borrar campos")
+borrar_menu.add_command(label="Borrar campos", command=limpiar_campos)
 
 crud_menu=Menu(barra_menu, tearoff=0)
-crud_menu.add_command(label="Crear")
+crud_menu.add_command(label="Crear", command=crear)
 crud_menu.add_command(label="Leer")
 crud_menu.add_command(label="Actualizar")
 crud_menu.add_command(label="Borrar")
@@ -121,7 +141,7 @@ comentarios_label.grid(row=5, column=0, sticky="e", padx=10, pady=10)
 botones_frame=Frame(root)
 botones_frame.pack()
 
-boton_crear=Button(botones_frame, text="Create")
+boton_crear=Button(botones_frame, text="Create", command=crear)
 boton_crear.grid(row=1, column=0, sticky="e", padx=10, pady=10)
 
 boton_Leer=Button(botones_frame, text="Read")
