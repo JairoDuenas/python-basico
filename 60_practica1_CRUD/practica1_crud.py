@@ -1,4 +1,36 @@
 from tkinter import *
+from tkinter import messagebox
+import sqlite3
+
+# ----------- Funciones ----------------------------
+
+def conexion_BBDD():
+  mi_conexion=sqlite3.connect("Usuarios")
+  mi_cursor=mi_conexion.cursor()
+
+  try:
+    mi_cursor.execute('''
+        CREATE TABLE DATOSUSUARIOS(
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        NOMBRE_USUARIO VARCHAR(50),
+        PASSWORD VARCHAR(50),
+        APELLIDO VARCHAR(10),
+        DIRECCION VARCHAR(50),
+        COMENTARIOS VARCHAR(100))
+      ''')
+
+    messagebox.showinfo("Base de datos", "Base de datos creada con éxito")
+
+  except:
+    messagebox.showwarning("¡Atención!", "La base de datos ya existe")
+
+def salir_aplicacion():
+  valor=messagebox.askquestion("Salir", "¿Desea salir de la aplicación")
+
+  if valor=="yes":
+    root.destroy()
+
+# --------------------------------------------------
 
 root=Tk()
 
@@ -8,8 +40,8 @@ root.config(menu=barra_menu, width=300, height=300)
 # ----------- Barra menú ----------------------------
 
 bbdd_menu=Menu(barra_menu, tearoff=0)
-bbdd_menu.add_command(label="Conectar")
-bbdd_menu.add_command(label="Salir")
+bbdd_menu.add_command(label="Conectar", command=conexion_BBDD)
+bbdd_menu.add_command(label="Salir", command=salir_aplicacion)
 
 borrar_menu=Menu(barra_menu, tearoff=0)
 borrar_menu.add_command(label="Borrar campos")
