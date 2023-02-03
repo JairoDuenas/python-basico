@@ -27,7 +27,7 @@ ayuda_menu.add_command(label="Acerca de...")
 barra_menu.add_cascade(label="Base Datos", menu=bbdd_menu)
 barra_menu.add_cascade(label="Borrar", menu=borrar_menu)
 barra_menu.add_cascade(label="CRUD", menu=crud_menu)
-barra_menu.add_cascade(label="Atuda", menu=ayuda_menu)
+barra_menu.add_cascade(label="Ayuda", menu=ayuda_menu)
 
 # ----------- Comienzo de campos ----------------------------
 
@@ -57,5 +57,42 @@ scroll_vertical=Scrollbar(mi_frame, command=texto_comentatio.yview)
 scroll_vertical.grid(row=5, column=2, sticky="nsew")
 
 texto_comentatio.config(yscrollcommand=scroll_vertical.set)
+
+# ----------- Los Labels ----------------------------
+
+id_label=Label(mi_frame, text="Id:")
+id_label.grid(row=0, column=0, sticky="e", padx=10, pady=10)
+
+nombre_label=Label(mi_frame, text="Nombre:")
+nombre_label.grid(row=1, column=0, sticky="e", padx=10, pady=10)
+
+pass_label=Label(mi_frame, text="Password:")
+pass_label.grid(row=2, column=0, sticky="e", padx=10, pady=10)
+
+apellido_label=Label(mi_frame, text="Apellido:")
+apellido_label.grid(row=3, column=0, sticky="e", padx=10, pady=10)
+
+direccion_label=Label(mi_frame, text="Dirección:")
+direccion_label.grid(row=4, column=0, sticky="e", padx=10, pady=10)
+
+comentarios_label=Label(mi_frame, text="Comentarios:")
+comentarios_label.grid(row=5, column=0, sticky="e", padx=10, pady=10)
+
+# ----------- Botones CRUD ----------------------------
+
+botones_frame=Frame(root)
+botones_frame.pack()
+
+boton_crear=Button(botones_frame, text="Create")
+boton_crear.grid(row=1, column=0, sticky="e", padx=10, pady=10)
+
+boton_Leer=Button(botones_frame, text="Read")
+boton_Leer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
+
+boton_actualizar=Button(botones_frame, text="Update")
+boton_actualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10)
+
+boton_borrar=Button(botones_frame, text="Delete")
+boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 
 root.mainloop()
