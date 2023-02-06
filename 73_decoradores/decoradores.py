@@ -1,11 +1,11 @@
 # ----- Función decoradora ----------
 def funcion_decoradora(funcion_parametro):
-  def funcion_interior():
+  def funcion_interior(*args, **kwargs):
 
     # Acciones adicionales que decoran
     print("Vamos a realizar un cálculo")
 
-    funcion_parametro()
+    funcion_parametro(*args, **kwargs)
 
     # Acciones adicionales que decoran
     print("Hemos terminado el cálculo")
@@ -13,14 +13,19 @@ def funcion_decoradora(funcion_parametro):
   return funcion_interior
 
 @funcion_decoradora
-def suma():
-  print(15+20)
+def suma(num1, num2, num3):
+  print(num1+num2+num3)
 
 @funcion_decoradora
-def resta():
-  print(30-10)
+def resta(num1, num2):
+  print(num1-num2)
 
-suma()
-resta()
+@funcion_decoradora
+def potencia(base, exponente):
+  print(pow(base, exponente))
+
+suma(7, 5, 8)
+resta(12, 10)
+potencia(5, 3)
 
 
