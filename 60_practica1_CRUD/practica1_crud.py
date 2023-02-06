@@ -42,11 +42,18 @@ def crear():
   mi_conexion=sqlite3.connect("Usuarios")
   mi_cursor=mi_conexion.cursor()
 
-  mi_cursor.execute("INSERT INTO DATOSUSUARIOS VALUES(NULL, '" + mi_nombre.get() +
+# Consulta parametrizada
+
+  datos=mi_nombre.get(), mi_password.get(), mi_apellido.get(), mi_direccion.get(), texto_comentatio.get("1.0", END)
+
+  mi_cursor.execute("INSERT INTO DATOSUSUARIOS VALUES(NULL, ?,?,?,?,?)", (datos))
+
+  """ mi_cursor.execute("INSERT INTO DATOSUSUARIOS VALUES(NULL, '" + mi_nombre.get() +
                     "','" + mi_password.get() +
                     "','" + mi_apellido.get() +
                     "','" + mi_direccion.get() +
                     "','" + texto_comentatio.get("1.0", END) + "')")
+"""
 
   mi_conexion.commit()
   messagebox.showinfo("Base de datos", "Registo insertado con éxito")
@@ -73,16 +80,30 @@ def actualizar():
   mi_conexion=sqlite3.connect("Usuarios")
   mi_cursor=mi_conexion.cursor()
 
-  mi_cursor.execute("UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO='" + mi_nombre.get() +
+  datos=mi_nombre.get(), mi_password.get(), mi_apellido.get(), mi_direccion.get(), texto_comentatio.get("1.0", END)
+
+  mi_cursor.execute("UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO=?, PASSWORD=?, APELLIDO=?, DIRECCION=?, COMENTARIOS=? " + "WHERE ID=" + mi_id.get(), (datos))
+
+  """ mi_cursor.execute("UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO='" + mi_nombre.get() +
                     "', PASSWORD='" + mi_password.get() +
                     "', APELLIDO='" + mi_apellido.get() +
                     "', DIRECCION='" + mi_direccion.get() +
                     "', COMENTARIOS='" + texto_comentatio.get("1.0", END) +
-                    "'WHERE ID=" + mi_id.get())
+                    "'WHERE ID=" + mi_id.get()) """
 
   mi_conexion.commit()
   messagebox.showinfo("Base de datos", "Registro actualizado con éxito")
 
+
+def eliminar():
+  mi_conexion=sqlite3.connect("Usuarios")
+  mi_cursor=mi_conexion.cursor()
+
+  mi_cursor.execute("DELETE FROM DATOSUSUARIOS WHERE ID=" + mi_id.get())
+
+  mi_conexion.commit()
+
+  messagebox.showinfo("Base de datos", "Registro borrado con éxito")
 
 # --------------------------------------------------
 
@@ -104,7 +125,7 @@ crud_menu=Menu(barra_menu, tearoff=0)
 crud_menu.add_command(label="Crear", command=crear)
 crud_menu.add_command(label="Leer", command=leer)
 crud_menu.add_command(label="Actualizar", command=actualizar)
-crud_menu.add_command(label="Borrar")
+crud_menu.add_command(label="Borrar", command=eliminar)
 
 ayuda_menu=Menu(barra_menu, tearoff=0)
 ayuda_menu.add_command(label="Licencia")
@@ -184,7 +205,7 @@ boton_Leer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
 boton_actualizar=Button(botones_frame, text="Update", command=actualizar)
 boton_actualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10)
 
-boton_borrar=Button(botones_frame, text="Delete")
+boton_borrar=Button(botones_frame, text="Delete", command=eliminar)
 boton_borrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 
 root.mainloop()
